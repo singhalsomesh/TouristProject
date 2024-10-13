@@ -62,6 +62,8 @@ exports.protect = catchAsync(async (req,res,next) => {
     if(!freshUser.changePasswordAfter(freshUser.passwordChangeAt , decode.iat)){
         return next(new AppError('The password has been changed.Please log in again'))
     }
+
+    req.user = freshUser;
     console.log(decode);
     next();
 })
